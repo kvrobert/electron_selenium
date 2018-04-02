@@ -18,5 +18,9 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.8.4"
+  },
+  "dependencies": {
+    "geckodriver": "^1.11.0",
+    "selenium-webdriver": "^3.3.1"
   }
 }

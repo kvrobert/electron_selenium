@@ -1,3 +1,10 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
+//require('./takePhoto.js');
+
+var webCapturer = new WebCapturer();
+webCapturer.takePhoto( "http://origo.hu", "origo.png", function(){ console.log("Origo Ready"); } );
+webCapturer.takePhotos([
+    { url: "http://favoritweb.hu/", file: "favoritweb.png" },
+    { url: "http://lap.hu/",        file: "lap.png" },
+    { url: "http://google.com/",    file: "google.png" }
+], function(){ console.log("All Ready"); }); 
+webCapturer.close();
