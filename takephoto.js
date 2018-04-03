@@ -15,7 +15,7 @@ function WebCapturer()
 
     // open chrome
     var driver = new webDriver.Builder().forBrowser('chrome').build();
-    driver.manage().window().maximize();  
+    driver.manage().window().maximize();
     
     // use user:pass to enter 
     this.auth = function( url ){        
@@ -23,9 +23,11 @@ function WebCapturer()
         driver.get( url ).then( () => {
             //    driver.findElement( by.name('username') ).sendKeys('admin_user');
             //    driver.findElement( by.name('password') ).sendKeys('ericsson');
+            driver.wait(until.elementLocated(by.name('username')), 2000);
             driver.findElement( by.className('loginForm ng-untouched ng-pristine ng-valid')).submit();  
-        } );
-        driver.manage().timeouts().implicitlyWait(15000).then( () => console.log('Authenticated') );
+        } ); 
+        
+        //driver.manage().timeouts().implicitlyWait(15000).then( () => console.log('Authenticated') );
     }
 
     // take one Photo, can use callback too
@@ -67,7 +69,7 @@ function WebCapturer()
                 if(closing) self.close();
             }); */ 
         
-            // callback-os megoldás, talán vár míg betölt az oldal..
+            // open URL, wait 2 secons and take a photo..... other solution with driver.wait for some element..must to find it
             driver.get(next.url).then( setTimeout( () => {
                 driver.takeScreenshot().then( function( data ) {    
                     fs.writeFileSync( next.file, data, 'base64' );
@@ -77,13 +79,11 @@ function WebCapturer()
                     if(closing) self.close();
                     });
                 }   
-                , 2000)
+                , 1800),
             );
         
         }
     }
-
-
 }
 
 /*var webDriver = require('selenium-webdriver');
