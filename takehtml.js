@@ -39,6 +39,7 @@ function HTMLCapturer(){
             
         driver.get(url).then( () =>{
             console.log('From take HTML...to the index');
+            var element = driver.findElements(by.className('blokk-hasab hasab-2 saved')).then( (elementsLength)=>alert( elementsLength ) );
             
            
         } );
