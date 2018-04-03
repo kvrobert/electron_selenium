@@ -68,15 +68,17 @@ function WebCapturer()
             }); */ 
         
             // callback-os megoldás, talán vár míg betölt az oldal..
-            driver.get(next.url).then( () => {
-                    driver.takeScreenshot().then( function( data ) {
+            driver.get(next.url).then( setTimeout( () => {
+                driver.takeScreenshot().then( function( data ) {    
                     fs.writeFileSync( next.file, data, 'base64' );
                     if(next.callBack) next.callBack();
                     ready = true;
                     nextPhoto();
                     if(closing) self.close();
-                });
-            } );
+                    });
+                }   
+                , 2000)
+            );
         
         }
     }

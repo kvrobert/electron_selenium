@@ -2,9 +2,11 @@
 
 var webCapturer = new WebCapturer();
 
-webCapturer.auth( 'http://10.41.96.135' );
-// webCapturer.takePhoto( "http://origo.hu", "origo.png", function(){ console.log("Origo Ready"); } );
-webCapturer.takePhoto( "http://10.41.96.135/status/NE_Overview", "node.png", function(){ console.log("NODE Capture HTML Ready"); } );
+//webCapturer.auth( 'http://10.41.96.135' );
+ webCapturer.takePhoto( "https://index.hu/", "index.png", function(){ 
+                                                        console.log("Origo Ready");
+                                                        webCapturer.close(); } );
+//webCapturer.takePhoto( "http://10.41.96.135/status/NE_Overview", "node.png", function(){ console.log("NODE Capture HTML Ready"); } );
 
 
 /*        webCapturer.takePhotos([
