@@ -6,6 +6,7 @@ function WebCapturer()
     var fs = require('fs');      
     var self = this;
     require('chromedriver');
+    require('geckodriver/');
     
     // to the photo capturing
     var queue = [];
@@ -14,7 +15,8 @@ function WebCapturer()
     var isAuthenticated = false;
 
     // open chrome
-    var driver = new webDriver.Builder().forBrowser('chrome').build();
+    var driver = new webDriver.Builder().forBrowser('firefox').build();
+    console.log("Driver loaded...");
     driver.manage().window().maximize();
     
     // use user:pass to enter 
@@ -25,6 +27,7 @@ function WebCapturer()
             //    driver.findElement( by.name('password') ).sendKeys('ericsson');
             driver.wait(until.elementLocated(by.name('username')), 2000);
             driver.findElement( by.className('loginForm ng-untouched ng-pristine ng-valid')).submit();  
+           // driver.findElement().t
         } ); 
         
         //driver.manage().timeouts().implicitlyWait(15000).then( () => console.log('Authenticated') );
@@ -46,8 +49,7 @@ function WebCapturer()
     };
     this.close = function()
     {
-        closing = true;
-        if( queue.length < 1 ) driver.quit();
+        driver.quit();
     };
 
     function nextPhoto()
@@ -70,16 +72,19 @@ function WebCapturer()
             }); */ 
         
             // open URL, wait 2 secons and take a photo..... other solution with driver.wait for some element..must to find it
-            driver.get(next.url).then( setTimeout( () => {
-                driver.takeScreenshot().then( function( data ) {    
+            driver.get(next.url).then( () => {
+            //    driver.takeScreenshot().then( function( data ) {    
+        //    driver.ta
+        //    driver.findElement().t
+           // driver.findElement( by.xpath("//*[(@id = 'js-repo-pjax-container')]") ).takeScreenshot(true).then( ( data ) => {
+            driver.findElement( by.xpath("//*[contains(@class, 'repository-content')]") ).takeScreenshot(true).then( ( data ) => {
                     fs.writeFileSync( next.file, data, 'base64' );
                     if(next.callBack) next.callBack();
                     ready = true;
                     nextPhoto();
-                    if(closing) self.close();
-                    });
+                   // if(closing) self.close();
+                    })
                 }   
-                , 1800),
             );
         
         }
