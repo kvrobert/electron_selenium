@@ -16,9 +16,8 @@ while( !isAuthenticated() ){
     setInterval( () => webCapturer.auth(), 2000 );    
 }*/
 
-webCapturer.takePhoto( "https://github.com/kvrobert/electron_selenium", "GITHUB.png", function(){ 
-                                                        console.log("Origo Ready");
-                                                        webCapturer.close(); } );
+//webCapturer.takePhoto( "https://github.com/kvrobert/electron_selenium", "GITHUB.png", function(){ console.log("Origo Ready"); webCapturer.close(); } );
+webCapturer.takePhoto( "http://www.origo.hu/index.html", "index.png", function(){ console.log("Origo Ready"); webCapturer.close(); } );
 
 /*//webCapturer.takePhoto( "http://10.41.96.135/status/NE_Overview", "node.png", function(){ console.log("NODE Capture HTML Ready"); } );
 

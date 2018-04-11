@@ -77,7 +77,10 @@ function WebCapturer()
         //    driver.ta
         //    driver.findElement().t
            // driver.findElement( by.xpath("//*[(@id = 'js-repo-pjax-container')]") ).takeScreenshot(true).then( ( data ) => {
-            driver.findElement( by.xpath("//*[contains(@class, 'repository-content')]") ).takeScreenshot(true).then( ( data ) => {
+           
+
+         //  driver.executeScript("document.getElementsByClassName('repository-content ')[0].style.display='none'");
+           driver.findElement( by.xpath("//*[@id='main']") ).takeScreenshot(false).then( ( data ) => {
                     fs.writeFileSync( next.file, data, 'base64' );
                     if(next.callBack) next.callBack();
                     ready = true;
